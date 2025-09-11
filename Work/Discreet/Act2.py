@@ -29,7 +29,10 @@ def show_add_student():
                 student[id]["student"] = new_name
             elif action.lower() == "id":
                 new_id = input("Enter new ID: ")
-                student[new_id] = student.pop(id)
+                if new_id not in student:
+                    student[new_id] = student.pop(id)
+                else:
+                    print("ID already exists.")
             return "Student information updated successfully."
         else:
             print("Student already exists:", student[id]["student"])
@@ -129,10 +132,8 @@ def show():
             id = input("Enter student ID to remove: ")
             print(remove_student(id))
         elif action == "5":
-            if len(student) == 0:
-                print("No student")
-            else:
-                print(student)
+            for id in student.keys():
+                print(f"ID: {id}, Name: {student[id]['student']}, Grades: {student[id]['grade']}")
         elif action == "6":
             rank_student()
         elif action == "7":
